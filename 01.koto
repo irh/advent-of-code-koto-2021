@@ -1,0 +1,59 @@
+# https://adventofcode.com/2021/day/1
+
+import io.print, test.assert_eq
+
+parse_input = |input|
+  input
+    .lines()
+    .each |n| n.to_number()
+    .to_tuple()
+
+windows = |data, n|
+  iter = data.iter()
+  for _ in 0..=data.size() - n
+    window_iter = iter.copy()
+    iter.next()
+    yield window_iter.take n
+
+count_increases = |report|
+  iter = if (koto.type report) == "Iterator" then report else report.iter()
+  previous = iter.next()
+  result = 0
+  for current in iter
+    if current > previous
+      result += 1
+    previous = current
+  result
+
+count_windowed_increases = |data|
+  windowed_sums = (windows data, 3).each |window| window.sum()
+  count_increases windowed_sums
+
+export main = ||
+  report =
+    io.extend_path koto.script_dir, "input", "01"
+      >> io.read_to_string
+      >> parse_input
+
+  print "Part one: ${count_increases report}" # 1754
+  print "Part two: ${count_windowed_increases report}" # 1789
+
+export @tests =
+  @pre_test: |self|
+    self.report = parse_input "\
+199
+200
+208
+210
+200
+207
+240
+269
+260
+263"
+
+  @test part_one: |self|
+    assert_eq (count_increases self.report), 7
+
+  @test part_two: |self|
+    assert_eq (count_windowed_increases self.report), 5
