@@ -2,21 +2,26 @@
 
 import io.print, test.assert_eq
 
+# Take each line of the input string and convert it into a number, returning a Tuple
 parse_input = |input|
   input
     .lines()
     .each |n| n.to_number()
     .to_tuple()
 
+# A generator that yields 'sliding window' iterators of size N over the input data
 windows = |data, n|
-  iter = data.iter()
-  for _ in 0..=data.size() - n
-    window_iter = iter.copy()
-    iter.next()
-    yield window_iter.take n
+  size = data.size()
+  if size >= n
+    iter = data.iter()
+    for _ in 0..=(size - n)
+      window_iter = iter.copy()
+      iter.next()
+      yield window_iter.take n
 
-count_increases = |report|
-  iter = if (koto.type report) == "Iterator" then report else report.iter()
+# Counts the number of adjacent values where the second value is greater than the first
+count_increases = |data|
+  iter = if (koto.type data) == "Iterator" then data else data.iter()
   previous = iter.next()
   result = 0
   for current in iter
@@ -25,6 +30,7 @@ count_increases = |report|
     previous = current
   result
 
+# Sums the windowed input data and counts adjacent increases in the sums
 count_windowed_increases = |data|
   windowed_sums = (windows data, 3).each |window| window.sum()
   count_increases windowed_sums
