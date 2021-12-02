@@ -1,0 +1,67 @@
+# https://adventofcode.com/2021/day/2
+
+import io.print, test.assert_eq
+
+parse_input = |input|
+  input
+    .lines()
+    .each |line|
+      tokens = line.split " "
+      command = tokens.next()
+      amount = tokens.next().to_number()
+      command, amount
+    .to_tuple()
+
+follow_commands_part_one = |commands|
+  position = num2 0, 0
+  for command, amount in commands
+    position += match command
+      "down"
+        num2 0, amount # Vertical direction is 'depth', so 'down' is positive
+      "up"
+        num2 0, -amount
+      "forward"
+        num2 amount, 0
+  position
+
+follow_commands_part_two = |commands|
+  position = num2 0, 0
+  aim = 0
+  for command, amount in commands
+    match command
+      "down"
+        aim += amount
+      "up"
+        aim -= amount
+      "forward"
+        position += num2 amount, aim * amount
+  position
+
+export main = ||
+  commands =
+    io.extend_path koto.script_dir, "input", "02"
+      >> io.read_to_string
+      >> parse_input
+
+  part_one = (follow_commands_part_one commands).product().to_int()
+  print "Part one: $part_one" # 2322630
+
+  part_two = (follow_commands_part_two commands).product().to_int()
+  print "Part two: $part_two" # 2105273490
+
+export @tests =
+  @pre_test: |self|
+    self.commands = parse_input "\
+forward 5
+down 5
+forward 8
+up 3
+down 8
+forward 2
+"
+
+  @test part_one: |self|
+    assert_eq (follow_commands_part_one self.commands), (num2 15, 10)
+
+  @test part_two: |self|
+    assert_eq (follow_commands_part_two self.commands), (num2 15, 60)
