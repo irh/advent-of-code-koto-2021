@@ -21,7 +21,7 @@ windows = |data, n|
 
 # Counts the number of adjacent values where the second value is greater than the first
 count_increases = |data|
-  iter = if (koto.type data) == "Iterator" then data else data.iter()
+  iter = data.iter()
   previous = iter.next()
   result = 0
   for current in iter
