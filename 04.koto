@@ -1,6 +1,6 @@
 import io.print, string.to_number, test.assert_eq
 
-# Parse the next 5 lines and, yield the 25 numbers that make up a board's grid
+# Parse the next 5 lines and yield the 25 numbers that make up the board's grid
 # e.g.
 # 22 13 17 11  0
 #  8  2 23  4 24
@@ -25,7 +25,7 @@ make_board = |lines|
   # Whether or not the board is in a winning state,
   # i.e. a row or column has 5 marked cells
   has_won: false
-  # Marks a number if found in the grid, and update the has_won flag
+  # Marks a number if found in the grid, and updates the has_won flag
   mark_number: |self, number|
     x = self.grid.position |n| n == number
     if x != ()
@@ -36,8 +36,8 @@ make_board = |lines|
         self.has_won = true
       if (self.column_marked_count[column] += 1) == 5
         self.has_won = true
-  # Returns the board's score
-  # Found by multiplying the last drawn number by the sum of the board's unmarked cells
+  # Returns the board's score,
+  # found by multiplying the last drawn number by the sum of the board's unmarked cells
   score: |self, last_number|
     last_number * self.grid.zip(self.marked)
       .keep |(_, marked)| not marked
