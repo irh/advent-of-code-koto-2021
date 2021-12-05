@@ -1,4 +1,4 @@
-import io.print, string.to_number, test.assert_eq
+import io.print, test.assert_eq
 
 # Parse the next 5 lines and yield the 25 numbers that make up the board's grid
 # e.g.
