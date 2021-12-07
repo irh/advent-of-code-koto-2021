@@ -22,7 +22,7 @@ make_simulation = |input|
       fish_counts.push spawning
     fish_counts.sum()
 
-export main = ||
+@main = ||
   simulation = io.extend_path koto.script_dir, "input", "06"
     >> io.read_to_string
     >> string.trim
@@ -31,7 +31,7 @@ export main = ||
   print "Part one: ${simulation.run 80}" # 351092
   print "Part two: ${simulation.run 256}" # 1595330616005
 
-export @tests =
+@tests =
   @pre_test: |self|
     self.simulation = make_simulation "3,4,3,1,2"
 

@@ -28,7 +28,7 @@ part_two = |positions|
   y = cost_to_reach_target target.ceil()
   x.min(y).to_int()
 
-export main = ||
+@main = ||
   positions = io.extend_path koto.script_dir, "input", "07"
     >> io.read_to_string
     >> string.trim
@@ -37,7 +37,7 @@ export main = ||
   print "Part one: ${part_one positions}" # 336701
   print "Part two: ${part_two positions}" # 95167302
 
-export @tests =
+@tests =
   @pre_test: |self|
     self.positions = parse_input "16,1,2,0,4,2,7,1,2,14"
 

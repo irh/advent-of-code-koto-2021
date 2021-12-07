@@ -35,7 +35,7 @@ count_windowed_increases = |data|
   windowed_sums = (windows data, 3).each |window| window.sum()
   count_increases windowed_sums
 
-export main = ||
+@main = ||
   report =
     io.extend_path koto.script_dir, "input", "01"
       >> io.read_to_string
@@ -44,7 +44,7 @@ export main = ||
   print "Part one: ${count_increases report}" # 1754
   print "Part two: ${count_windowed_increases report}" # 1789
 
-export @tests =
+@tests =
   @pre_test: |self|
     self.report = parse_input "\
 199

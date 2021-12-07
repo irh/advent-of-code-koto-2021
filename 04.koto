@@ -72,7 +72,7 @@ run_game = |game|
         if board.has_won
           yield board.score n
 
-export main = ||
+@main = ||
   winning_scores = io.extend_path koto.script_dir, "input", "04"
     >> io.read_to_string
     >> parse_input
@@ -81,7 +81,7 @@ export main = ||
   print "Part one: ${winning_scores.next()}" # 65325
   print "Part two: ${winning_scores.last()}" # 4624
 
-export @tests =
+@tests =
   @pre_test: |self|
     self.game = parse_input "\
 7,4,9,5,11,17,23,2,0,14,21,24,10,16,13,6,15,25,12,22,18,20,8,19,3,26,1

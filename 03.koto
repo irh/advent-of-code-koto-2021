@@ -80,14 +80,14 @@ get_life_support_rating = |report|
   c02_scrubber_rating = filter_report report, true
   oxygen_generator_rating * c02_scrubber_rating
 
-export main = ||
+@main = ||
   input = io.extend_path koto.script_dir, "input", "03"
     >> io.read_to_string
     >> parse_input
   print "Part one: ${get_power_consumption input}" # 4191876
   print "Part two: ${get_life_support_rating input}" # 3414905
 
-export @tests =
+@tests =
   @pre_test: |self|
     self.report = parse_input "\
 00100

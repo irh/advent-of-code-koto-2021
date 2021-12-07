@@ -37,7 +37,7 @@ follow_commands_part_two = |commands|
         position += num2 amount, aim * amount
   position
 
-export main = ||
+@main = ||
   commands =
     io.extend_path koto.script_dir, "input", "02"
       >> io.read_to_string
@@ -49,7 +49,7 @@ export main = ||
   part_two = (follow_commands_part_two commands).product().to_int()
   print "Part two: $part_two" # 2105273490
 
-export @tests =
+@tests =
   @pre_test: |self|
     self.commands = parse_input "\
 forward 5
