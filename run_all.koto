@@ -21,4 +21,7 @@ import "06"
 print "\nDay 7"
 import "07"
 
+print "\nDay 8"
+import "08"
+
 print "\nSuccess!"
