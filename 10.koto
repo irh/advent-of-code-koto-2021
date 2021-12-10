@@ -28,7 +28,7 @@ part_one = |input|
 part_two = |input|
   scores = input.lines()
     .each |line| check_input_line line
-    .keep |result| (koto.type result) == "List"
+    .keep |result| (type result) == "List"
     .each |result|
       result.fold 0, |result, char|
         result *= 5
@@ -37,8 +37,8 @@ part_two = |input|
           ']' then 2
           '}' then 3
           '>' then 4
-    .to_tuple()
-    .sort_copy()
+    .to_list()
+    .sort()
   scores[scores.size() / 2]
 
 @main = ||
