@@ -1,4 +1,4 @@
-import io.print, test.assert_eq
+# https://adventofcode.com/2021/day/6
 
 make_simulation = |input|
   # Parse the input string and produce a list containing the number of fish alive with

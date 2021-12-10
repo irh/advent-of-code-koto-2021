@@ -1,4 +1,4 @@
-import io.print, test.assert_eq
+# https://adventofcode.com/2021/day/8
 
 # Parse the input lines into input and output patterns
 # e.g. acedgfb cdfbe gcdfa fbcad dab cefabd cdfgeb | cdfeb fcadb cdfeb cdbaf

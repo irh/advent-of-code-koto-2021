@@ -1,7 +1,5 @@
 # https://adventofcode.com/2021/day/10
 
-import io.print, test.assert_eq
-
 # Checks an input line for invalid closing chars, and if none are found then the expected
 # list of closing chars is returned. An empty list indicates a complete input line.
 check_input_line = |line|

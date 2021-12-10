@@ -1,4 +1,4 @@
-import io.print, test.assert_eq
+# https://adventofcode.com/2021/day/5
 
 make_vent_line = |x0, y0, x1, y1|
   start: num2 x0, y0

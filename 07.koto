@@ -1,4 +1,4 @@
-import io.print, test.assert_eq
+# https://adventofcode.com/2021/day/7
 
 parse_input = |input|
   input

@@ -1,7 +1,5 @@
 # https://adventofcode.com/2021/day/3
 
-import io.print, test.assert_eq
-
 parse_input = |input|
   input
     .lines()

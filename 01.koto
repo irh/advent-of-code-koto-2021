@@ -1,7 +1,5 @@
 # https://adventofcode.com/2021/day/1
 
-import io.print, test.assert_eq
-
 # Take each line of the input string and convert it into a number, returning a Tuple
 parse_input = |input|
   input
