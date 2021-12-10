@@ -1,6 +1,6 @@
 import io.print
 
-days = 9
+days = 10
 
 for day in 1..=days
   print "Day $day"
