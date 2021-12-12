@@ -1,6 +1,4 @@
-import io.print
-
-days = 11
+days = 12
 
 for day in 1..=days
   print "Day $day"
