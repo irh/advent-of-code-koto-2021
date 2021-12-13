@@ -94,6 +94,7 @@ part_two = |grid|
   i
 
 @main = ||
+  t = os.start_timer()
   grid = make_grid "\
 4836484555
 4663841772
@@ -108,6 +109,7 @@ part_two = |grid|
 
   print "Part one: ${part_one grid}" # 1659
   print "Part two: ${part_two grid}" # 127
+  print "{:.3}s", t.elapsed()
 
 @tests =
   @pre_test: |self|

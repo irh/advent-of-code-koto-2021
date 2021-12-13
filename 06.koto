@@ -23,6 +23,8 @@ make_simulation = |input|
     fish_counts.sum()
 
 @main = ||
+  t = os.start_timer()
+
   simulation = io.extend_path koto.script_dir, "input", "06"
     >> io.read_to_string
     >> string.trim
@@ -30,6 +32,8 @@ make_simulation = |input|
 
   print "Part one: ${simulation.run 80}" # 351092
   print "Part two: ${simulation.run 256}" # 1595330616005
+
+  print "{:.3}s", t.elapsed()
 
 @tests =
   @pre_test: |self|

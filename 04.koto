@@ -73,6 +73,8 @@ run_game = |game|
           yield board.score n
 
 @main = ||
+  t = os.start_timer()
+
   winning_scores = io.extend_path koto.script_dir, "input", "04"
     >> io.read_to_string
     >> parse_input
@@ -80,6 +82,8 @@ run_game = |game|
 
   print "Part one: ${winning_scores.next()}" # 65325
   print "Part two: ${winning_scores.last()}" # 4624
+
+  print "{:.3}s", t.elapsed()
 
 @tests =
   @pre_test: |self|

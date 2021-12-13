@@ -42,11 +42,15 @@ part_two = |input|
   scores[scores.size() / 2]
 
 @main = ||
+  t = os.start_timer()
+
   input = io.extend_path koto.script_dir, "input", "10"
     >> io.read_to_string
 
   print "Part one: ${part_one input}" # 318081
   print "Part two: ${part_two input}" # 4361305341
+
+  print "{:.3}s", t.elapsed()
 
 @tests =
   @pre_test: |self|

@@ -36,6 +36,8 @@ follow_commands_part_two = |commands|
   position
 
 @main = ||
+  t = os.start_timer()
+
   commands =
     io.extend_path koto.script_dir, "input", "02"
       >> io.read_to_string
@@ -46,6 +48,8 @@ follow_commands_part_two = |commands|
 
   part_two = (follow_commands_part_two commands).product().to_int()
   print "Part two: $part_two" # 2105273490
+
+  print "{:.3}s", t.elapsed()
 
 @tests =
   @pre_test: |self|

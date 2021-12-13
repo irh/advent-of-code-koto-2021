@@ -29,6 +29,8 @@ part_two = |positions|
   x.min(y).to_int()
 
 @main = ||
+  t = os.start_timer()
+
   positions = io.extend_path koto.script_dir, "input", "07"
     >> io.read_to_string
     >> string.trim
@@ -36,6 +38,8 @@ part_two = |positions|
 
   print "Part one: ${part_one positions}" # 336701
   print "Part two: ${part_two positions}" # 95167302
+
+  print "{:.3}s", t.elapsed()
 
 @tests =
   @pre_test: |self|

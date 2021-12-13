@@ -34,6 +34,8 @@ count_windowed_increases = |data|
   count_increases windowed_sums
 
 @main = ||
+  t = os.start_timer()
+
   report =
     io.extend_path koto.script_dir, "input", "01"
       >> io.read_to_string
@@ -41,6 +43,8 @@ count_windowed_increases = |data|
 
   print "Part one: ${count_increases report}" # 1754
   print "Part two: ${count_windowed_increases report}" # 1789
+
+  print "{:.3}s", t.elapsed()
 
 @tests =
   @pre_test: |self|

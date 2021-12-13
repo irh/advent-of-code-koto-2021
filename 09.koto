@@ -71,12 +71,16 @@ make_map = |input|
         .product()
 
 @main = ||
+  t = os.start_timer()
+
   map = io.extend_path koto.script_dir, "input", "09"
     >> io.read_to_string
     >> make_map
 
   print "Part one: ${map.part_one()}" # 516
   print "Part two: ${map.part_two()}" # 1023660
+
+  print "{:.3}s", t.elapsed()
 
 @tests =
   @pre_test: |self|
