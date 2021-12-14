@@ -1,6 +1,6 @@
 # https://adventofcode.com/2021/day/8
 
-import set.make_set
+import set
 
 # Parse the input lines into input and output patterns
 # e.g. acedgfb cdfbe gcdfa fbcad dab cefabd cdfgeb | cdfeb fcadb cdfeb cdbaf
@@ -14,12 +14,12 @@ parse_entries = |input|
         .split " "
         .keep |s| not s.is_empty()
         .consume |pattern|
-          pattern_chars = make_set pattern.chars()
+          pattern_chars = pattern.chars().to_set()
           patterns.update pattern_chars.size(), [], |entry| entry.push pattern_chars
       outputs = parts.next()
         .split(" ")
         .keep(|s| not s.is_empty())
-        .each |pattern| make_set pattern.chars()
+        .each |pattern| pattern.chars().to_set()
         .to_tuple()
       {patterns, outputs}
     .to_tuple()
