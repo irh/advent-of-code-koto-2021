@@ -1,4 +1,4 @@
-# https://adventofcode.com/2021/day/13
+# https://adventofcode.com/2021/day/14
 
 import windows
 
@@ -13,12 +13,13 @@ make_polymer = |input|
     .to_map()
 
   return
-    pairs: template
-      .windows 2
-      .each |pair| pair.to_string()
-      .fold {}, |result, pair|
-        result.update pair, 0, |n| n + 1
-        result
+    pairs:
+      template
+        .windows 2
+        .each |pair| pair.to_string()
+        .fold {}, |result, pair|
+          result.update pair, 0, |n| n + 1
+          result
     instructions: instructions
     end_element: template.last()
 
