@@ -1,5 +1,7 @@
 # https://adventofcode.com/2021/day/8
 
+import set.make_set
+
 # Parse the input lines into input and output patterns
 # e.g. acedgfb cdfbe gcdfa fbcad dab cefabd cdfgeb | cdfeb fcadb cdfeb cdbaf
 parse_entries = |input|
@@ -12,12 +14,12 @@ parse_entries = |input|
         .split " "
         .keep |s| not s.is_empty()
         .consume |pattern|
-          pattern_chars = pattern.chars().to_map()
+          pattern_chars = make_set pattern.chars()
           patterns.update pattern_chars.size(), [], |entry| entry.push pattern_chars
       outputs = parts.next()
         .split(" ")
         .keep(|s| not s.is_empty())
-        .each |pattern| pattern.chars().to_map()
+        .each |pattern| make_set pattern.chars()
         .to_tuple()
       {patterns, outputs}
     .to_tuple()
@@ -35,7 +37,7 @@ part_one = |input|
 # Finds the segment mapping from the sorted list of scrambled segment patterns
 find_mapping = |patterns|
   missing_segment = |a, b|
-    a.keys().find |key| not b.contains_key key
+    a.iter().find |key| not b.contains key
 
   # one has 2 segments
   one = patterns.get(2).first()
@@ -54,14 +56,14 @@ find_mapping = |patterns|
   segment_e = missing_segment(eight, nine)
 
   # two is the pattern with 5 segments that has the segment e
-  two = patterns.get(5).find |p| p.contains_key segment_e
+  two = patterns.get(5).find |p| p.contains segment_e
 
   # five is the pattern with 5 segments that isn't two or three
   five = patterns.get(5).find |p| p != two and p != three
   segment_c = missing_segment(four, five)
 
   # six is the pattern with 6 segments that doesn't contain the segment c
-  six = patterns.get(6).find |p| not p.contains_key segment_c
+  six = patterns.get(6).find |p| not p.contains segment_c
 
   # zero is the pattern with 6 segments that isn't six or nine
   zero = patterns.get(6).find |p| p != six and p != nine
@@ -72,6 +74,7 @@ find_mapping = |patterns|
 decode_output_value = |outputs, mapping|
   width = outputs.size() - 1
   outputs
+    .iter()
     .each |output|
       mapping.position |x| x == output
     .enumerate()

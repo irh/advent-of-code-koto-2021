@@ -1,7 +1,9 @@
 # https://adventofcode.com/2021/day/13
 
+import set.make_set
+
 make_paper = ||
-  dots: {}
+  dots: make_set()
 
   fold: |self, (along, n)|
     dot_folder = match along
@@ -19,21 +21,21 @@ make_paper = ||
             dot
           else
             num2 dot[0], (y - 2 * (y - n))
-    self.dots = self.dots.fold {}, |result, (dot, _)|
-      result.insert dot_folder dot
-      result
+    self.dots = self.dots.iter().fold
+      make_set(),
+      |result, dot| result.insert dot_folder dot
 
   @display: |self|
     display_iter = ||
       dots = self.dots
-      bounds_x, bounds_y = dots.fold
+      bounds_x, bounds_y = dots.iter().fold
         (0..0, 0..0),
-        |(bounds_x, bounds_y), (dot, _)|
+        |(bounds_x, bounds_y), dot|
           (bounds_x.union dot[0]), (bounds_y.union dot[1])
 
       for y in bounds_y
         for x in bounds_x
-          if dots.contains_key(num2 x, y)
+          if dots.contains (num2 x, y)
             yield '#'
           else
             yield '.'
