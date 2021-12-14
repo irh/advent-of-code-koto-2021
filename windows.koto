@@ -1,0 +1,9 @@
+# A generator that yields 'sliding window' iterators of size N over the input data
+iterator.windows = |data, n|
+  size = data.size()
+  if size >= n
+    iter = data.iter()
+    for _ in 0..=(size - n)
+      window_iter = iter.copy()
+      iter.next()
+      yield window_iter.take n
