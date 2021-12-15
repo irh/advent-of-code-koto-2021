@@ -1,6 +1,6 @@
 # https://adventofcode.com/2021/day/15
 
-import chunks, set.make_set
+import chunks, heap.make_heap, set.make_set
 
 make_cave_map = |input|
   grid_width = input.lines().next().chars().count()
@@ -38,27 +38,22 @@ make_cave_map = |input|
         yield down
 
     # Finds the shortest path using an A*-ish algorithm
-    # TODO speed this up with a heap, sorting the list for each iteration is slow
     shortest_path_risk: |self|
       grid = self.grid
-      start = 0
       target = grid.size() - 1
-      open_nodes = [{position: start, risk: 0}]
-      visited = make_set [start]
-      i = 0
+      open_nodes = make_heap [{position: 0, risk: 0}], |a, b| a.risk < b.risk
+      visited = make_set [0]
       while not open_nodes.is_empty()
         t = os.start_timer()
         node = open_nodes.pop()
         if node.position == target
           return node.risk
-        position = node.position
         node_risk = node.risk
-        for neighbour in self.neighbours position
+        for neighbour in self.neighbours node.position
           if not visited.contains neighbour
             neighbour_risk = node_risk + grid[neighbour]
             visited.insert neighbour
-            open_nodes.push {position: neighbour, risk: neighbour_risk}
-        open_nodes.sort |node| -node.risk
+            open_nodes.insert {position: neighbour, risk: neighbour_risk}
       throw "Path not found"
 
     expand_grid: |self|
@@ -96,8 +91,10 @@ make_cave_map = |input|
     >> make_cave_map
 
   print "Part one: ${cave_map.shortest_path_risk()}" # 498
+
   cave_map.expand_grid()
   print "Part two: ${cave_map.shortest_path_risk()}" # 2901
+
   print "{:.3}s", t.elapsed()
 
 @tests =
