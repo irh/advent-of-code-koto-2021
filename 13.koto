@@ -7,14 +7,14 @@ make_paper = ||
 
   fold: |self, (along, n)|
     dot_folder = match along
-      'x'
+      'x' then
         |dot|
           x = dot.x()
           if x < n
             dot
           else
             make_num2 (x - 2 * (x - n)), dot.y()
-      'y'
+      'y' then
         |dot|
           y = dot.y()
           if y < n

@@ -10,8 +10,7 @@ check_input_line = |line|
       '[' then close_stack.push ']'
       '{' then close_stack.push '}'
       '<' then close_stack.push '>'
-      other if close_stack.pop() != other
-        return other
+      other if close_stack.pop() != other then return other
   close_stack.reverse()
 
 # Find the 'syntax error score'

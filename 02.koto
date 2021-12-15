@@ -14,11 +14,11 @@ follow_commands_part_one = |commands|
   position = make_num2 0, 0
   for command, amount in commands
     position += match command
-      "down"
+      "down" then
         make_num2 0, amount # Vertical direction is 'depth', so 'down' is positive
-      "up"
+      "up" then
         make_num2 0, -amount
-      "forward"
+      "forward" then
         make_num2 amount, 0
   position
 
@@ -27,11 +27,11 @@ follow_commands_part_two = |commands|
   aim = 0
   for command, amount in commands
     match command
-      "down"
+      "down" then
         aim += amount
-      "up"
+      "up" then
         aim -= amount
-      "forward"
+      "forward" then
         position += make_num2 amount, aim * amount
   position
 
@@ -63,7 +63,7 @@ forward 2
 "
 
   @test part_one: |self|
-    assert_eq (follow_commands_part_one self.commands), (num2 15, 10)
+    assert_eq (follow_commands_part_one self.commands), (make_num2 15, 10)
 
   @test part_two: |self|
-    assert_eq (follow_commands_part_two self.commands), (num2 15, 60)
+    assert_eq (follow_commands_part_two self.commands), (make_num2 15, 60)
