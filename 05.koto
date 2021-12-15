@@ -1,8 +1,8 @@
 # https://adventofcode.com/2021/day/5
 
 make_vent_line = |x0, y0, x1, y1|
-  start: num2 x0, y0
-  end: num2 x1, y1
+  start: make_num2 x0, y0
+  end: make_num2 x1, y1
   is_diagonal: |self|
     self.start[0] != self.end[0] and self.start[1] != self.end[1]
   # Yield each position along the vent line
@@ -10,14 +10,14 @@ make_vent_line = |x0, y0, x1, y1|
     position = self.start
     end = self.end
     diff = self.end - position
-    step = match diff[0], diff[1]
+    step = match diff.x(), diff.y()
       x, 0 # Horizontal
-        num2 (if x > 0 then 1 else -1), 0
+        make_num2 (if x > 0 then 1 else -1), 0
       0, y # Vertical
-        num2 0, (if y > 0 then 1 else -1)
+        make_num2 0, (if y > 0 then 1 else -1)
       x, y # Diagonal
         axis_length = x.abs()
-        num2 x / axis_length, y / axis_length
+        make_num2 x / axis_length, y / axis_length
     until position == end
       yield position
       position += step

@@ -11,19 +11,19 @@ parse_input = |input|
     .to_tuple()
 
 follow_commands_part_one = |commands|
-  position = num2 0, 0
+  position = make_num2 0, 0
   for command, amount in commands
     position += match command
       "down"
-        num2 0, amount # Vertical direction is 'depth', so 'down' is positive
+        make_num2 0, amount # Vertical direction is 'depth', so 'down' is positive
       "up"
-        num2 0, -amount
+        make_num2 0, -amount
       "forward"
-        num2 amount, 0
+        make_num2 amount, 0
   position
 
 follow_commands_part_two = |commands|
-  position = num2 0, 0
+  position = make_num2 0, 0
   aim = 0
   for command, amount in commands
     match command
@@ -32,7 +32,7 @@ follow_commands_part_two = |commands|
       "up"
         aim -= amount
       "forward"
-        position += num2 amount, aim * amount
+        position += make_num2 amount, aim * amount
   position
 
 @main = ||

@@ -9,18 +9,18 @@ make_paper = ||
     dot_folder = match along
       'x'
         |dot|
-          x = dot[0]
+          x = dot.x()
           if x < n
             dot
           else
-            num2 (x - 2 * (x - n)), dot[1]
+            make_num2 (x - 2 * (x - n)), dot.y()
       'y'
         |dot|
-          y = dot[1]
+          y = dot.y()
           if y < n
             dot
           else
-            num2 dot[0], (y - 2 * (y - n))
+            make_num2 dot.x(), (y - 2 * (y - n))
     self.dots = self.dots.iter().fold
       make_set(),
       |result, dot| result.insert dot_folder dot
@@ -31,11 +31,11 @@ make_paper = ||
       bounds_x, bounds_y = dots.iter().fold
         (0..0, 0..0),
         |(bounds_x, bounds_y), dot|
-          (bounds_x.union dot[0]), (bounds_y.union dot[1])
+          (bounds_x.union dot.x()), (bounds_y.union dot.y())
 
       for y in bounds_y
         for x in bounds_x
-          if dots.contains (num2 x, y)
+          if dots.contains (make_num2 x, y)
             yield '#'
           else
             yield '.'
@@ -51,7 +51,7 @@ parse_input = |input|
 
     tokens = line.split ','
     x, y = tokens.next(), tokens.next()
-    paper.dots.insert num2 x.to_number(), y.to_number()
+    paper.dots.insert make_num2 x.to_number(), y.to_number()
 
   instructions = lines
     .each |line|
