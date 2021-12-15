@@ -4,6 +4,7 @@ export make_set = |values|
   insert: |self, value|
     self.data.insert value
     self
+  is_empty: |self| self.size() == 0
   iter: |self| self.data.keys() # TODO @iterator would be nice to have
   size: |self| self.data.size()
 
