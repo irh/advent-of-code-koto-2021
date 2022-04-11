@@ -28,7 +28,7 @@ make_board = |lines|
   # Marks a number if found in the grid, and updates the has_won flag
   mark_number: |self, number|
     x = self.grid.position |n| n == number
-    if x != ()
+    if x
       self.marked[x] = true
       row = (x / 5).floor()
       column = x % 5
@@ -57,7 +57,7 @@ parse_input = |input|
 
   # Parse the remaining lines as board grids
   boards_iter = ||
-    while lines.next() != ()
+    while lines.next()
       yield make_board lines
   boards = boards_iter().to_tuple()
 

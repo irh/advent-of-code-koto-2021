@@ -3,7 +3,7 @@ iterator.chunks = |iterable, n|
   keep_going = true
   while keep_going
     yield iter.copy().take n
-    keep_going = iter.skip(n - 1).next() != ()
+    keep_going = iter.skip(n - 1).next() != null
 
 
 @tests =

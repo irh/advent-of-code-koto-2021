@@ -49,10 +49,10 @@ find_mapping = |patterns|
   eight = patterns.get(7).first()
 
   # three is the pattern with 5 segments that has all of one's segments
-  three = patterns.get(5).find |p| missing_segment(one, p) == ()
+  three = patterns.get(5).find |p| missing_segment(one, p) == null
 
   # nine is the pattern with 6 segments that has all of four's segments
-  nine = patterns.get(6).find |p| missing_segment(four, p) == ()
+  nine = patterns.get(6).find |p| missing_segment(four, p) == null
   segment_e = missing_segment(eight, nine)
 
   # two is the pattern with 5 segments that has the segment e

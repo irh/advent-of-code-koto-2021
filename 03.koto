@@ -28,7 +28,7 @@ signed_int_to_binary_digit = |count|
   switch
     count > 0 then 1
     count < 0 then 0
-    else ()
+    else null
 
 get_power_consumption = |report|
   report_width = report.first().size()
@@ -68,7 +68,7 @@ filter_report = |report, flipped|
   for position in 0..report.first().size()
     bit_criteria = match get_most_common_digit_in_position report, position
       0 then off
-      1 or () then on
+      1 or null then on
     report.retain |line| line[position] == bit_criteria
     if report.size() == 1 then break
   binary_digits_to_int report.first()

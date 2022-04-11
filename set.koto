@@ -1,5 +1,5 @@
 export make_set = |values|
-  data: if values == () then {} else values.to_map()
+  data: if not values then {} else values.to_map()
   contains: |self, value| self.data.contains_key value
   insert: |self, value|
     self.data.insert value

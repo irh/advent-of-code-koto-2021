@@ -5,7 +5,7 @@ parse_input = |input|
 
   add_connection = |start, end|
     caves.update start, |cave|
-      if cave == ()
+      if not cave
         # Initialize the cave as a Map with an is_small entry
         start_char = start.chars().next()
         cave =
