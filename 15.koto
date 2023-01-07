@@ -1,6 +1,6 @@
 # https://adventofcode.com/2021/day/15
 
-import chunks, heap.make_heap, set.make_set
+import heap.make_heap, set.make_set
 
 make_cave_map = |input|
   grid_width = input.lines().next().chars().count()

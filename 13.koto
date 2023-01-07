@@ -21,14 +21,14 @@ make_paper = ||
             dot
           else
             make_num2 dot.x(), (y - 2 * (y - n))
-    self.dots = self.dots.iter().fold
+    self.dots = self.dots.fold
       make_set(),
       |result, dot| result.insert dot_folder dot
 
   @display: |self|
     display_iter = ||
       dots = self.dots
-      bounds_x, bounds_y = dots.iter().fold
+      bounds_x, bounds_y = dots.fold
         (0..0, 0..0),
         |(bounds_x, bounds_y), dot|
           (bounds_x.union dot.x()), (bounds_y.union dot.y())

@@ -1,7 +1,5 @@
 # https://adventofcode.com/2021/day/14
 
-import windows
-
 make_polymer = |input|
   template = input.lines().next().chars().to_tuple()
 

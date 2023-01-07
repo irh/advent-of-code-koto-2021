@@ -37,7 +37,7 @@ part_one = |input|
 # Finds the segment mapping from the sorted list of scrambled segment patterns
 find_mapping = |patterns|
   missing_segment = |a, b|
-    a.iter().find |key| not b.contains key
+    a.find |key| not b.contains key
 
   # one has 2 segments
   one = patterns.get(2).first()
@@ -74,7 +74,6 @@ find_mapping = |patterns|
 decode_output_value = |outputs, mapping|
   width = outputs.size() - 1
   outputs
-    .iter()
     .each |output|
       mapping.position |x| x == output
     .enumerate()
