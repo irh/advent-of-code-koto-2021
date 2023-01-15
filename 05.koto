@@ -21,9 +21,9 @@ make_vent_line = |x0, y0, x1, y1|
         axis_length = x.abs()
         vec2 x / axis_length, y / axis_length
     until position == end
-      yield position
+      yield position.x(), position.y()
       position += step
-    yield end
+    yield end.x(), end.y()
 
 make_vent_map = |vent_lines, allow_diagonal_lines|
   vent_map = {}
@@ -31,7 +31,7 @@ make_vent_map = |vent_lines, allow_diagonal_lines|
     if allow_diagonal_lines or not line.is_diagonal()
       for position in line.positions()
         vent_map.update
-          (position.x(), position.y()),
+          position,
           0,
           |line_count| line_count + 1
 
