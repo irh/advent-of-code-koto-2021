@@ -1,29 +1,32 @@
 # https://adventofcode.com/2021/day/13
 
 import set.make_set
+import geometry.vec2
+
+fold_x = |dot, n|
+  x, y = dot
+  if x < n
+    dot
+  else
+    (x - 2 * (x - n)), y
+
+fold_y = |dot, n|
+  x, y = dot
+  if y < n
+    dot
+  else
+    x, (y - 2 * (y - n))
 
 make_paper = ||
   dots: make_set()
 
   fold: |self, (along, n)|
     dot_folder = match along
-      'x' then
-        |dot|
-          x = dot.x()
-          if x < n
-            dot
-          else
-            make_num2 (x - 2 * (x - n)), dot.y()
-      'y' then
-        |dot|
-          y = dot.y()
-          if y < n
-            dot
-          else
-            make_num2 dot.x(), (y - 2 * (y - n))
+      'x' then fold_x
+      'y' then fold_y
     self.dots = self.dots.fold
       make_set(),
-      |result, dot| result.insert dot_folder dot
+      |result, dot| result.insert dot_folder dot, n
 
   @display: |self|
     display_iter = ||
@@ -31,11 +34,11 @@ make_paper = ||
       bounds_x, bounds_y = dots.fold
         (0..0, 0..0),
         |(bounds_x, bounds_y), dot|
-          (bounds_x.union dot.x()), (bounds_y.union dot.y())
+          (bounds_x.union dot[0]), (bounds_y.union dot[1])
 
       for y in bounds_y
         for x in bounds_x
-          if dots.contains (make_num2 x, y)
+          if dots.contains (x, y)
             yield '#'
           else
             yield '.'
@@ -51,7 +54,7 @@ parse_input = |input|
 
     tokens = line.split ','
     x, y = tokens.next(), tokens.next()
-    paper.dots.insert make_num2 x.to_number(), y.to_number()
+    paper.dots.insert (x.to_number(), y.to_number())
 
   instructions = lines
     .each |line|
