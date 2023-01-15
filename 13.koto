@@ -1,6 +1,7 @@
 # https://adventofcode.com/2021/day/13
 
 import set.make_set
+import geometry.vec2
 
 make_paper = ||
   dots: make_set()
@@ -13,14 +14,14 @@ make_paper = ||
           if x < n
             dot
           else
-            make_num2 (x - 2 * (x - n)), dot.y()
+            vec2 (x - 2 * (x - n)), dot.y()
       'y' then
         |dot|
           y = dot.y()
           if y < n
             dot
           else
-            make_num2 dot.x(), (y - 2 * (y - n))
+            vec2 dot.x(), (y - 2 * (y - n))
     self.dots = self.dots.fold
       make_set(),
       |result, dot| result.insert dot_folder dot
@@ -35,7 +36,7 @@ make_paper = ||
 
       for y in bounds_y
         for x in bounds_x
-          if dots.contains (make_num2 x, y)
+          if dots.contains (vec2 x, y)
             yield '#'
           else
             yield '.'
@@ -51,7 +52,7 @@ parse_input = |input|
 
     tokens = line.split ','
     x, y = tokens.next(), tokens.next()
-    paper.dots.insert make_num2 x.to_number(), y.to_number()
+    paper.dots.insert vec2 x.to_number(), y.to_number()
 
   instructions = lines
     .each |line|

@@ -1,5 +1,7 @@
 # https://adventofcode.com/2021/day/2
 
+import geometry.vec2
+
 parse_input = |input|
   input
     .lines()
@@ -11,19 +13,19 @@ parse_input = |input|
     .to_tuple()
 
 follow_commands_part_one = |commands|
-  position = make_num2 0, 0
+  position = vec2 0, 0
   for command, amount in commands
     position += match command
       "down" then
-        make_num2 0, amount # Vertical direction is 'depth', so 'down' is positive
+        vec2 0, amount # Vertical direction is 'depth', so 'down' is positive
       "up" then
-        make_num2 0, -amount
+        vec2 0, -amount
       "forward" then
-        make_num2 amount, 0
+        vec2 amount, 0
   position
 
 follow_commands_part_two = |commands|
-  position = make_num2 0, 0
+  position = vec2 0, 0
   aim = 0
   for command, amount in commands
     match command
@@ -32,8 +34,10 @@ follow_commands_part_two = |commands|
       "up" then
         aim -= amount
       "forward" then
-        position += make_num2 amount, aim * amount
+        position += vec2 amount, aim * amount
   position
+
+vec2_product = |v| (v.x() * v.y()).to_int()
 
 @main = ||
   t = os.start_timer()
@@ -43,10 +47,10 @@ follow_commands_part_two = |commands|
       >> io.read_to_string
       >> parse_input
 
-  part_one = (follow_commands_part_one commands).product().to_int()
+  part_one = (follow_commands_part_one commands) >> vec2_product
   print "Part one: $part_one" # 2322630
 
-  part_two = (follow_commands_part_two commands).product().to_int()
+  part_two = (follow_commands_part_two commands) >> vec2_product
   print "Part two: $part_two" # 2105273490
 
   print "{:.3}s", t.elapsed()
@@ -63,7 +67,7 @@ forward 2
 "
 
   @test part_one: |self|
-    assert_eq (follow_commands_part_one self.commands), (make_num2 15, 10)
+    assert_eq (follow_commands_part_one self.commands), (vec2 15, 10)
 
   @test part_two: |self|
-    assert_eq (follow_commands_part_two self.commands), (make_num2 15, 60)
+    assert_eq (follow_commands_part_two self.commands), (vec2 15, 60)
