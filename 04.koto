@@ -26,7 +26,7 @@ make_board = |lines|
   # i.e. a row or column has 5 marked cells
   has_won: false
   # Marks a number if found in the grid, and updates the has_won flag
-  mark_number: |self, number|
+  mark_number: |number|
     x = self.grid.position |n| n == number
     if x
       self.marked[x] = true
@@ -38,7 +38,7 @@ make_board = |lines|
         self.has_won = true
   # Returns the board's score,
   # found by multiplying the last drawn number by the sum of the board's unmarked cells
-  score: |self, last_number|
+  score: |last_number|
     last_number * self.grid.zip(self.marked)
       .keep |(_, marked)| not marked
       .each |(n, _)| n
@@ -86,7 +86,7 @@ run_game = |game|
   print "{:.3}s", t.elapsed()
 
 @tests =
-  @pre_test: |self|
+  @pre_test: ||
     self.game = parse_input "\
 7,4,9,5,11,17,23,2,0,14,21,24,10,16,13,6,15,25,12,22,18,20,8,19,3,26,1
 
@@ -108,8 +108,8 @@ run_game = |game|
 22 11 13  6  5
  2  0 12  3  7"
 
-  @test part_one: |self|
+  @test part_one: ||
     assert_eq run_game(self.game).next(), 4512
 
-  @test part_two: |self|
+  @test part_two: ||
     assert_eq run_game(self.game).last(), 1924

@@ -118,26 +118,26 @@ zg-he
 pj-fs
 start-RW"
 
-  @test part_one_small: |self|
+  @test part_one_small: ||
     caves = parse_input self.small
     assert_eq (get_path_count caves, false), 10
 
-  @test part_one_medium: |self|
+  @test part_one_medium: ||
     caves = parse_input self.medium
     assert_eq (get_path_count caves, false), 19
 
-  @test part_one_large: |self|
+  @test part_one_large: ||
     caves = parse_input self.large
     assert_eq (get_path_count caves, false), 226
 
-  @test part_two_small: |self|
+  @test part_two_small: ||
     caves = parse_input self.small
     assert_eq (get_path_count caves, true), 36
 
-  @test part_two_medium: |self|
+  @test part_two_medium: ||
     caves = parse_input self.medium
     assert_eq (get_path_count caves, true), 103
 
-  @test part_two_large: |self|
+  @test part_two_large: ||
     caves = parse_input self.large
     assert_eq (get_path_count caves, true), 3509

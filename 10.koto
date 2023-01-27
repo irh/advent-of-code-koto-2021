@@ -52,7 +52,7 @@ part_two = |input|
   print "{:.3}s", t.elapsed()
 
 @tests =
-  @pre_test: |self|
+  @pre_test: ||
     self.input = "\
 [({(<(())[]>[[{[]{<()<>>
 [(()[<>])]({[<{<<[]>>(
@@ -65,9 +65,9 @@ part_two = |input|
 <{([([[(<>()){}]>(<<{{
 <{([{{}}[<[[[<>{}]]]>[]]"
 
-  @test part_one: |self|
+  @test part_one: ||
     assert_eq (part_one self.input), 26397
 
-  @test part_two: |self|
+  @test part_two: ||
     assert_eq (part_two self.input), 288957
 

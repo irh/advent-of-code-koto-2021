@@ -14,7 +14,7 @@ make_simulation = |input|
   # - Fish in slot 0 restart their timers in slot 6, and spawn new fish in slot 8
   # - All other fish move to the 'days remaining' slot one below their previous positions
   # - The result is the total number of fish
-  run: |self, days|
+  run: |days|
     fish_counts = self.fish_counts.copy()
     for _ in 0..days
       spawning = fish_counts.remove 0
@@ -36,11 +36,11 @@ make_simulation = |input|
   print "{:.3}s", t.elapsed()
 
 @tests =
-  @pre_test: |self|
+  @pre_test: ||
     self.simulation = make_simulation "3,4,3,1,2"
 
-  @test part_one: |self|
+  @test part_one: ||
     assert_eq (self.simulation.run 80), 5934
 
-  @test part_two: |self|
+  @test part_two: ||
     assert_eq (self.simulation.run 256), 26984457539

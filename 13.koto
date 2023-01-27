@@ -20,17 +20,18 @@ fold_y = |dot, n|
 make_paper = ||
   dots: make_set()
 
-  fold: |self, (along, n)|
+  fold: |(along, n)|
     dot_folder = match along
       'x' then fold_x
       'y' then fold_y
-    self.dots = self.dots.fold
-      make_set(),
-      |result, dot| result.insert dot_folder dot, n
+    self.dots = self.dots
+      .each |dot| dot_folder dot, n
+      .to_set()
 
-  @display: |self|
+  @display: ||
+    paper = self
     display_iter = ||
-      dots = self.dots
+      dots = paper.dots
       bounds_x, bounds_y = dots.fold
         (0..0, 0..0),
         |(bounds_x, bounds_y), dot|
@@ -87,7 +88,7 @@ parse_input = |input|
   print "{:.3}s", t.elapsed()
 
 @tests =
-  @pre_test: |self|
+  @pre_test: ||
     self.input = parse_input "\
 6,10
 0,14
@@ -111,7 +112,7 @@ parse_input = |input|
 fold along y=7
 fold along x=5"
 
-  @test example_input: |self|
+  @test example_input: ||
     paper = self.input.paper
     instructions = self.input.instructions.iter()
     paper.fold instructions.next()

@@ -21,7 +21,7 @@ make_polymer = |input|
     instructions: instructions
     end_element: template.last()
 
-    step: |self|
+    step: ||
       instructions = self.instructions
       self.pairs = self.pairs
         .fold {}, |result, (pair, count)|
@@ -30,7 +30,7 @@ make_polymer = |input|
           result.update x + pair[1], 0, |n| n + count
           result
 
-    element_counts: |self|
+    element_counts: ||
       result = self.pairs
         .fold {}, |result, (pair, count)|
           result.update pair[0], 0, |n| n + count
@@ -58,7 +58,7 @@ step_polymer = |polymer, n|
   print "{:.3}s", t.elapsed()
 
 @tests =
-  @pre_test: |self|
+  @pre_test: ||
     self.polymer= make_polymer "\
 NNCB
 
@@ -79,7 +79,7 @@ BC -> B
 CC -> N
 CN -> C"
 
-  @test step_example_input: |self|
+  @test step_example_input: ||
     polymer = self.polymer
     assert_eq polymer.pairs, {NN: 1, NC: 1, CB: 1}
     assert_eq polymer.element_counts(), {N: 2, B: 1, C: 1}
@@ -89,8 +89,8 @@ CN -> C"
     polymer.step()
     assert_eq polymer.element_counts(), {N: 2, B: 6, C: 4, H: 1}
 
-  @test part_one: |self|
+  @test part_one: ||
     assert_eq (step_polymer self.polymer, 10), 1588
 
-  @test part_two: |self|
+  @test part_two: ||
     assert_eq (step_polymer self.polymer, 40), 2188189693529

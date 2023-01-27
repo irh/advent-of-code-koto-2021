@@ -5,10 +5,10 @@ import geometry.vec2
 make_vent_line = |x0, y0, x1, y1|
   start: vec2 x0, y0
   end: vec2 x1, y1
-  is_diagonal: |self|
+  is_diagonal: ||
     self.start.x() != self.end.x() and self.start.y() != self.end.y()
   # Yield each position along the vent line
-  positions: |self|
+  positions: ||
     position = self.start
     end = self.end
     diff = self.end - position
@@ -37,7 +37,7 @@ make_vent_map = |vent_lines, allow_diagonal_lines|
 
   return
     grid: vent_map
-    count_overlaps: |self|
+    count_overlaps: ||
       self.grid
         .keep |(_, count)| count >= 2
         .count()
@@ -73,7 +73,7 @@ parse_input = |input|
   print "{:.3}s", t.elapsed()
 
 @tests =
-  @pre_test: |self|
+  @pre_test: ||
     self.vent_lines = parse_input "\
 0,9 -> 5,9
 8,0 -> 0,8
@@ -86,12 +86,12 @@ parse_input = |input|
 0,0 -> 8,8
 5,5 -> 8,2"
 
-  @test part_one: |self|
+  @test part_one: ||
     vent_map = make_vent_map self.vent_lines, false
     overlaps = vent_map.count_overlaps()
     assert_eq overlaps, 5
 
-  @test part_two: |self|
+  @test part_two: ||
     vent_map = make_vent_map self.vent_lines, true
     overlaps = vent_map.count_overlaps()
     assert_eq overlaps, 12

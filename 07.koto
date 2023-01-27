@@ -42,11 +42,11 @@ part_two = |positions|
   print "{:.3}s", t.elapsed()
 
 @tests =
-  @pre_test: |self|
+  @pre_test: ||
     self.positions = parse_input "16,1,2,0,4,2,7,1,2,14"
 
-  @test part_one: |self|
+  @test part_one: ||
     assert_eq (part_one self.positions), 37
 
-  @test part_two: |self|
+  @test part_two: ||
     assert_eq (part_two self.positions), 168

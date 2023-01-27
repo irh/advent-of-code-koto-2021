@@ -37,7 +37,7 @@ count_windowed_increases = |data|
   print "{:.3}s", t.elapsed()
 
 @tests =
-  @pre_test: |self|
+  @pre_test: ||
     self.report = parse_input "\
 199
 200
@@ -50,8 +50,8 @@ count_windowed_increases = |data|
 260
 263"
 
-  @test part_one: |self|
+  @test part_one: ||
     assert_eq (count_increases self.report), 7
 
-  @test part_two: |self|
+  @test part_two: ||
     assert_eq (count_windowed_increases self.report), 5

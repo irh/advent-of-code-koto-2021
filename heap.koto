@@ -1,69 +1,73 @@
 # A simple min-heap
 #
 # compare_fn can be redefined to alter the sorting behaviour
-empty_heap =
-  @meta data: []
-  @meta compare_fn: |a, b| a < b
 
-  insert: |self, value|
+compare_and_swap = |heap, a, b|
+  data = heap.data
+  value_a = data[a]
+  value_b = data[b]
+  if heap.compare_fn value_a, value_b
+    data[a] = value_b
+    data[b] = value_a
+    true
+  else
+    false
+
+sift_down = |heap, i|
+  data = heap.data
+  child_a = i * 2 + 1
+  child = match data.get child_a
+    null then return
+    value_a then
+      child_b = child_a + 1
+      match data.get child_b
+        null then child_a
+        value_b then
+          if heap.compare_fn value_a, value_b
+            child_a
+          else
+            child_b
+  if compare_and_swap heap, child, i
+    sift_down heap, child
+
+sift_up = |heap, i|
+  if i == 0 then return
+  parent = ((i - 1) / 2).floor()
+  if compare_and_swap heap, i, parent
+    sift_up heap, parent
+
+heap_meta =
+  @type: 'Heap'
+
+  @meta insert: |value|
     data = self.data
     i = data.size()
     data.push value
-    self.sift_up i
+    sift_up self, i
 
-  pop: |self|
+  @meta pop: ||
     data = self.data
     result = data.first()
     last = data.pop()
     if not data.is_empty()
       data[0] = last
-      self.sift_down 0
+      sift_down self, 0
     result
 
-  is_empty: |self| self.data.is_empty()
-
-  @meta sift_up: |self, i|
-    if i == 0 then return
-    parent = ((i - 1) / 2).floor()
-    if self.compare_and_swap i, parent
-      self.sift_up parent
-
-  @meta sift_down: |self, i|
-    data = self.data
-    child_a = i * 2 + 1
-    child = match data.get child_a
-      null then return
-      value_a then
-        child_b = child_a + 1
-        match data.get child_b
-          null then child_a
-          value_b then
-            if self.compare_fn value_a, value_b
-              child_a
-            else
-              child_b
-    if self.compare_and_swap child, i
-      self.sift_down child
-
-  @meta compare_and_swap: |self, a, b|
-    data = self.data
-    value_a = data[a]
-    value_b = data[b]
-    if self.compare_fn value_a, value_b
-      data[a] = value_b
-      data[b] = value_a
-      true
-    else
-      false
+  @meta is_empty: || self.data.is_empty()
 
 export make_heap = |values, compare_fn|
-  heap = empty_heap.deep_copy()
-  if compare_fn
-    heap.compare_fn = compare_fn
+  heap =
+    data: []
+    compare_fn: compare_fn or |a, b| a < b
+
+  heap = heap.with_meta_map(heap_meta)
+
   if values
     heap.data = values.to_list()
     for i in (heap.data.size() - 1)..=0
-      heap.sift_down i
+      sift_down heap, i
+
   heap
 
 @tests =

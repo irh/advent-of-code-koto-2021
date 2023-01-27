@@ -56,7 +56,7 @@ vec2_product = |v| (v.x() * v.y()).to_int()
   print "{:.3}s", t.elapsed()
 
 @tests =
-  @pre_test: |self|
+  @pre_test: ||
     self.commands = parse_input "\
 forward 5
 down 5
@@ -66,8 +66,8 @@ down 8
 forward 2
 "
 
-  @test part_one: |self|
+  @test part_one: ||
     assert_eq (follow_commands_part_one self.commands), (vec2 15, 10)
 
-  @test part_two: |self|
+  @test part_two: ||
     assert_eq (follow_commands_part_two self.commands), (vec2 15, 60)

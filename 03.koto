@@ -90,7 +90,7 @@ get_life_support_rating = |report|
   print "{:.3}s", t.elapsed()
 
 @tests =
-  @pre_test: |self|
+  @pre_test: ||
     self.report = parse_input "\
 00100
 11110
@@ -105,10 +105,10 @@ get_life_support_rating = |report|
 00010
 01010"
 
-  @test part_one: |self|
+  @test part_one: ||
     result = get_power_consumption self.report
     assert_eq result, 198
 
-  @test part_two: |self|
+  @test part_two: ||
     result = get_life_support_rating self.report
     assert_eq result, 230

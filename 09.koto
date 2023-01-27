@@ -8,15 +8,15 @@ make_map = |input|
       for n in line.chars()
         yield n.to_number()
 
-  map = yield_numbers().to_tuple()
+  data = yield_numbers().to_tuple()
 
   return
-    map: map
+    data: data
     map_width: map_width
-    last_row: (map.size() / map_width) - 1
+    last_row: (data.size() / map_width) - 1
 
     # Yields neighbouring map positions in clockwise order starting from the top
-    neighbours: |self, i|
+    neighbours: |i|
       map_width = self.map_width
       x = i % map_width
       y = (i / map_width).floor()
@@ -30,32 +30,33 @@ make_map = |input|
         yield i - 1
 
     # Find low points in the map and sum their 'risk levels'
-    part_one: |self|
+    part_one: ||
       result = 0
-      for i, height in self.map.enumerate()
+      for i, height in self.data.enumerate()
         neighbour_count = 0
         higher_neighbour_count = 0
         for neighbour in self.neighbours i
           neighbour_count += 1
-          if map[neighbour] > height
+          if self.data[neighbour] > height
             higher_neighbour_count += 1
         if higher_neighbour_count == neighbour_count
           result += height + 1
       result
 
     # Find the three largest basins in the map and multiply their sizes together
-    part_two: |self|
-      is_in_basin = list.with_size self.map.size(), false
+    part_two: ||
+      map = self
+      data = self.data
+      is_in_basin = list.with_size data.size(), false
       basins = []
       assign_to_basin = |i, basin|
         is_in_basin[i] = true
         basin.push i
-        map = self.map
-        for neighbour in self.neighbours i
-          if map[neighbour] < 9 and not is_in_basin[neighbour]
+        for neighbour in map.neighbours i
+          if data[neighbour] < 9 and not is_in_basin[neighbour]
             assign_to_basin neighbour, basin
 
-      for i, height in self.map.enumerate()
+      for i, height in map.data.enumerate()
         if height < 9 and not is_in_basin[i]
           # Make a new basin and start assigning positions from the current position
           basin = []
@@ -73,8 +74,7 @@ make_map = |input|
 @main = ||
   t = os.start_timer()
 
-  map = io.extend_path koto.script_dir, "input", "09"
-    >> io.read_to_string
+  map = io.extend_path koto.script_dir, "input", "09" >> io.read_to_string
     >> make_map
 
   print "Part one: ${map.part_one()}" # 516
@@ -83,7 +83,7 @@ make_map = |input|
   print "{:.3}s", t.elapsed()
 
 @tests =
-  @pre_test: |self|
+  @pre_test: ||
     self.map = make_map "\
 2199943210
 3987894921
@@ -91,8 +91,8 @@ make_map = |input|
 8767896789
 9899965678"
 
-  @test part_one: |self|
+  @test part_one: ||
     assert_eq self.map.part_one(), 15
 
-  @test part_two: |self|
+  @test part_two: ||
     assert_eq self.map.part_two(), 1134

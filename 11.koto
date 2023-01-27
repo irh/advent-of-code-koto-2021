@@ -16,7 +16,7 @@ make_grid = |input|
     last_row: (grid.size() / grid_width) - 1
 
     # Yields neighbouring grid positions
-    neighbours: |self, i|
+    neighbours: |i|
       grid_width = self.grid_width
       x = i % grid_width
       y = (i / grid_width).floor()
@@ -47,7 +47,7 @@ make_grid = |input|
         if x < grid_width - 1
           yield down + 1
 
-    step_simulation: |self|
+    step_simulation: ||
       grid = self.grid
       grid_size = grid.size()
       flash_count = 0
@@ -70,7 +70,7 @@ make_grid = |input|
             keep_going = true
       flash_count
 
-    print_grid: |self|
+    print_grid: ||
       grid_width = self.grid_width
       for i, n in self.grid.enumerate()
         io.stdout().write(n)
@@ -112,7 +112,7 @@ part_two = |grid|
   print "{:.3}s", t.elapsed()
 
 @tests =
-  @pre_test: |self|
+  @pre_test: ||
     self.grid = make_grid "\
 5483143223
 2745854711
@@ -125,8 +125,8 @@ part_two = |grid|
 4846848554
 5283751526"
 
-  @test part_one: |self|
+  @test part_one: ||
     assert_eq (part_one self.grid), 1656
 
-  @test part_two: |self|
+  @test part_two: ||
     assert_eq (part_two self.grid), 195

@@ -1,12 +1,19 @@
 export make_set = |values|
-  data: if not values then {} else values.to_map()
-  contains: |self, value| self.data.contains_key value
-  insert: |self, value|
-    self.data.insert value
-    self
-  is_empty: |self| self.size() == 0
-  size: |self| self.data.size()
+  data = {}
+  if values != null
+    for value in values
+      data.insert value
 
-  @iterator: |self| self.data.keys()
+  return
+    data: data
 
-iterator.to_set = |iter| make_set iter
+    contains: |value| self.data.contains_key value
+    insert: |value|
+      self.data.insert value
+      self
+    is_empty: || self.size() == 0
+    size: || self.data.size()
+
+    @iterator: || self.data.keys()
+
+iterator.to_set = || make_set self
