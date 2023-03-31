@@ -63,7 +63,7 @@ get_most_common_digit_in_position = |report, position|
 filter_report = |report, flipped|
   # We want to filter the report down to a single entry,
   # so make a copy to avoid modifying the original data
-  report = report.copy()
+  report = copy report
   on, off = if flipped then 0, 1 else 1, 0
   for position in 0..report.first().size()
     bit_criteria = match get_most_common_digit_in_position report, position

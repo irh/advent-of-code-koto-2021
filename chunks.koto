@@ -2,7 +2,7 @@ iterator.chunks = |iterable, n|
   iter = iterable.iter()
   keep_going = true
   while keep_going
-    yield iter.copy().take n
+    yield (copy iter).take n
     keep_going = iter.skip(n - 1).next() != null
 
 

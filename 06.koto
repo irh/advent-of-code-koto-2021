@@ -15,7 +15,7 @@ make_simulation = |input|
   # - All other fish move to the 'days remaining' slot one below their previous positions
   # - The result is the total number of fish
   run: |days|
-    fish_counts = self.fish_counts.copy()
+    fish_counts = copy self.fish_counts
     for _ in 0..days
       spawning = fish_counts.remove 0
       fish_counts[6] += spawning

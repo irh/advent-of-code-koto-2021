@@ -78,7 +78,7 @@ make_grid = |input|
           print ""
 
 part_one = |grid|
-  grid = grid.deep_copy()
+  grid = deep_copy grid
   flash_count = 0
   for i in 0..100
     flash_count += grid.step_simulation()

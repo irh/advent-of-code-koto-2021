@@ -65,7 +65,7 @@ make_cave_map = |input|
         .chunks grid_width
         .fold [], |result, row|
           for i in 0..5
-            for risk in row.copy()
+            for risk in copy row
               new_risk = (risk + i)
               if new_risk > 9
                 new_risk -= 9

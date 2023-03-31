@@ -38,7 +38,7 @@ get_path_count = |caves, allow_double_small_cave|
       yield path
     else
       for destination in cave.destinations
-        visitor = visit_caves destination, path.copy(), allow_double_small_cave
+        visitor = visit_caves destination, (copy path), allow_double_small_cave
         for finished_path in visitor
           yield finished_path
 
