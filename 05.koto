@@ -1,6 +1,6 @@
 # https://adventofcode.com/2021/day/5
 
-import geometry.vec2
+from geometry import vec2
 
 make_vent_line = |x0, y0, x1, y1|
   start: vec2 x0, y0

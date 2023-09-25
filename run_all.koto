@@ -1,11 +1,11 @@
 days = 15
 
+t = os.start_timer()
+
 for day in 1..=days
   print "Day $day"
-  if day < 10
-    import "0$day"
-  else
-    import "$day"
+  import "${string.format '{:0>2}', day}"
   print ""
 
 print "Success!"
+print '{:.3}s', t.elapsed()

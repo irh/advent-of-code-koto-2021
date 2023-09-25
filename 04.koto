@@ -1,6 +1,6 @@
 # https://adventofcode.com/2021/day/4
 
-import iterator.repeat
+from iterator import repeat
 
 # Parse the next 5 lines and yield the 25 numbers that make up the board's grid
 # e.g.

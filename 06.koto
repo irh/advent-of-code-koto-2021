@@ -1,6 +1,6 @@
 # https://adventofcode.com/2021/day/6
 
-import iterator.repeat
+from iterator import repeat
 
 make_simulation = |input|
   # Parse the input string and produce a list containing the number of fish alive with

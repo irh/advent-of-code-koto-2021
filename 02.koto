@@ -1,6 +1,6 @@
 # https://adventofcode.com/2021/day/2
 
-import geometry.vec2
+from geometry import vec2
 
 parse_input = |input|
   input

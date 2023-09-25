@@ -1,6 +1,6 @@
 # https://adventofcode.com/2021/day/9
 
-import iterator.repeat
+from iterator import repeat
 
 make_map = |input|
   map_width = input.lines().next().chars().count()
